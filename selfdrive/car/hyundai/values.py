@@ -47,7 +47,7 @@ class CAR:
 
 
 # ex) CAR_FORCE_RECOGNITION = CAR.GRANDEUR_IG
-CAR_FORCE_RECOGNITION = None
+CAR_FORCE_RECOGNITION = CAR.K7
 
 class Buttons:
   NONE = 0
@@ -491,7 +491,7 @@ FEATURES = {
 
   "use_blinker_flash": {CAR.SONATA_LF_TURBO},
 
-  "use_ldws": False,
+  "use_ldws": True,
 }
 
 DBC = {
