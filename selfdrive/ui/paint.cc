@@ -385,7 +385,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
 static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w ) {
   const UIScene *scene = &s->scene;
   int bb_rx = bb_x + (int)(bb_w/2);
-  int bb_ry = bb_y;
+  int bb_ry = bb_y + 300;
   int bb_h = 5;
   NVGcolor lab_color = nvgRGBA(255, 255, 255, 200);
   NVGcolor uom_color = nvgRGBA(255, 255, 255, 200);
@@ -468,7 +468,7 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
         value_fontSize, label_fontSize, uom_fontSize );
     bb_ry = bb_y + bb_h;
   }
-
+/* GPS Delete
   // add panda GPS altitude
   if (UI_FEATURE_RIGHT_GPS_ALTITUDE) {
     char val_str[16];
@@ -483,7 +483,8 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
         value_fontSize, label_fontSize, uom_fontSize );
     bb_ry = bb_y + bb_h;
   }
-
+ */ 
+/* GPS delete
   // add panda GPS accuracy
   if (UI_FEATURE_RIGHT_GPS_ACCURACY) {
     char val_str[16];
@@ -518,7 +519,8 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
         value_fontSize, label_fontSize, uom_fontSize );
     bb_ry = bb_y + bb_h;
   }
-
+*/
+/* GPS delete
   // add panda GPS satellite
   if (UI_FEATURE_RIGHT_GPS_SATELLITE) {
     char val_str[16];
@@ -536,7 +538,7 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
         value_fontSize, label_fontSize, uom_fontSize );
     bb_ry = bb_y + bb_h;
   }
-
+*/
   //finally draw the frame
   bb_h += 40;
   nvgBeginPath(s->vg);
@@ -660,11 +662,11 @@ static void bb_ui_draw_UI(UIState *s)
   const int bb_dmr_y = (box_y + (bdr_is * 1.5)) + UI_FEATURE_RIGHT_Y;
 
 #if UI_FEATURE_LEFT
-  bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y, bb_dml_w);
+  bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y - 25, bb_dml_w);
 #endif
 
 #if UI_FEATURE_RIGHT
-  bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y, bb_dmr_w);
+  bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y + 340, bb_dmr_w);
 #endif
 
   bb_ui_draw_basic_info(s);
@@ -711,7 +713,7 @@ static void ui_draw_vision_maxspeed(UIState *s) {
 
   bool is_cruise_set = (cruiseRealMaxSpeed > 0 && cruiseRealMaxSpeed < 255);
 
-  const Rect rect = {s->viz_rect.x + (bdr_s * 2), int(s->viz_rect.y + (bdr_s * 1.5)), 184, 202};
+  const Rect rect = {s->viz_rect.x + (bdr_s * 2) + 200, int(s->viz_rect.y + (bdr_s * 1.5) + 500), 184, 202};
   ui_fill_rect(s->vg, rect, COLOR_BLACK_ALPHA(100), 30.);
   ui_draw_rect(s->vg, rect, COLOR_WHITE_ALPHA(100), 10, 20.);
 
@@ -724,30 +726,30 @@ static void ui_draw_vision_maxspeed(UIState *s) {
 
     if(!longControl && scc_smoother.getState() == 0)
     {
-        ui_draw_text(s, text_x, 148, "STOCK", 25 * 2.5, COLOR_WHITE, "sans-semibold");
+        ui_draw_text(s, text_x, 148 + 500, "STOCK", 25 * 2.5, COLOR_WHITE, "sans-semibold");
     }
     else
     {
         snprintf(str, sizeof(str), "%d", (int)(cruiseVirtualMaxSpeed + 0.5));
-        ui_draw_text(s, text_x, 148, str, 33 * 2.5, COLOR_WHITE, "sans-semibold");
+        ui_draw_text(s, text_x, 148 + 500, str, 33 * 2.5, COLOR_WHITE, "sans-semibold");
     }
 
     snprintf(str, sizeof(str), "%d", (int)(cruiseRealMaxSpeed + 0.5));
-    ui_draw_text(s, text_x, 242, str, 48 * 2.5, COLOR_WHITE, "sans-bold");
+    ui_draw_text(s, text_x, 242 + 500, str, 48 * 2.5, COLOR_WHITE, "sans-bold");
   }
   else
   {
     if(!longControl && scc_smoother.getState() == 0)
-        ui_draw_text(s, text_x, 148, "STOCK", 25 * 2.5, COLOR_WHITE, "sans-semibold");
+        ui_draw_text(s, text_x, 148 + 500, "STOCK", 25 * 2.5, COLOR_WHITE, "sans-semibold");
     else
     {
         if(longControl)
-            ui_draw_text(s, text_x, 148, "OP", 25 * 2.5, COLOR_WHITE_ALPHA(100), "sans-semibold");
+            ui_draw_text(s, text_x, 148 + 500, "OP", 25 * 2.5, COLOR_WHITE_ALPHA(100), "sans-semibold");
         else
-            ui_draw_text(s, text_x, 148, "SCC", 25 * 2.5, COLOR_WHITE_ALPHA(100), "sans-semibold");
+            ui_draw_text(s, text_x, 148 + 500, "SCC", 25 * 2.5, COLOR_WHITE_ALPHA(100), "sans-semibold");
     }
 
-    ui_draw_text(s, text_x, 242, "N/A", 42 * 2.5, COLOR_WHITE_ALPHA(100), "sans-semibold");
+    ui_draw_text(s, text_x, 242 + 500, "N/A", 42 * 2.5, COLOR_WHITE_ALPHA(100), "sans-semibold");
   }
 
 }
@@ -756,8 +758,8 @@ static void ui_draw_vision_speed(UIState *s) {
   const float speed = std::max(0.0, s->scene.controls_state.getCluSpeedMs() * (s->scene.is_metric ? 3.6 : 2.2369363));
   const std::string speed_str = std::to_string((int)std::nearbyint(speed));
   nvgTextAlign(s->vg, NVG_ALIGN_CENTER | NVG_ALIGN_BASELINE);
-  ui_draw_text(s, s->viz_rect.centerX(), 240, speed_str.c_str(), 96 * 2.5, COLOR_WHITE, "sans-bold");
-  ui_draw_text(s, s->viz_rect.centerX(), 320, s->scene.is_metric ? "km/h" : "mph", 36 * 2.5, COLOR_WHITE_ALPHA(200), "sans-regular");
+  ui_draw_text(s, s->viz_rect.centerX(), 240 + 500, speed_str.c_str(), 130 * 2.5, COLOR_WHITE, "sans-bold");
+  ui_draw_text(s, s->viz_rect.centerX(), 320 + 500, s->scene.is_metric ? "km/h" : "mph", 26 * 2.5, COLOR_WHITE_ALPHA(200), "sans-regular");
 }
 
 static void ui_draw_vision_event(UIState *s) {
