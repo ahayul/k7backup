@@ -141,7 +141,7 @@ class Alert:
 class NoEntryAlert(Alert):
   def __init__(self, alert_text_2, audible_alert=AudibleAlert.chimeError,
                visual_alert=VisualAlert.none, duration_hud_alert=2.):
-    super().__init__("오픈파일럿 사용불가", alert_text_2, AlertStatus.normal,
+    super().__init__("K7 자율주행 사용불가", alert_text_2, AlertStatus.normal,
                      AlertSize.mid, Priority.LOW, visual_alert,
                      audible_alert, .4, duration_hud_alert, 3.)
 
@@ -232,7 +232,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.startup: {
     ET.PERMANENT: Alert(
-      "오픈파일럿 사용준비 완료",
+      "K7 자율주행 준비 완료",
       "항상 핸들을 잡고 도로를 주시하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 3.),
@@ -240,7 +240,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.startupMaster: {
     ET.PERMANENT: Alert(
-      "오픈파일럿 사용준비 완료",
+      "K7 자율주행 준비 완료",
       "항상 핸들을 잡고 도로를 주시하세요",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 3.),
@@ -723,7 +723,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.noTarget: {
     ET.IMMEDIATE_DISABLE: Alert(
-      "오픈파일럿 사용불가",
+      "자율주행 사용불가",
       "근접 앞차량이 없습니다",
       AlertStatus.normal, AlertSize.mid,
       Priority.HIGH, VisualAlert.none, AudibleAlert.chimeDisengage, .4, 2., 3.),
@@ -732,7 +732,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.speedTooLow: {
     ET.IMMEDIATE_DISABLE: Alert(
-      "오픈파일럿 사용불가",
+      "자율주행 사용불가",
       "속도를 높이고 재가동하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.HIGH, VisualAlert.none, AudibleAlert.chimeDisengage, .4, 2., 3.),
