@@ -385,7 +385,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
 static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w ) {
   const UIScene *scene = &s->scene;
   int bb_rx = bb_x + (int)(bb_w/2);
-  int bb_ry = bb_y + 300;
+  int bb_ry = bb_y;
   int bb_h = 5;
   NVGcolor lab_color = nvgRGBA(255, 255, 255, 200);
   NVGcolor uom_color = nvgRGBA(255, 255, 255, 200);
@@ -666,7 +666,7 @@ static void bb_ui_draw_UI(UIState *s)
 #endif
 
 #if UI_FEATURE_RIGHT
-  bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y + 340, bb_dmr_w);
+  bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y + 300, bb_dmr_w);
 #endif
 
   bb_ui_draw_basic_info(s);
