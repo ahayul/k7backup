@@ -658,14 +658,12 @@ static void bb_ui_draw_UI(UIState *s)
   const int bb_dmr_w = 180;
   const int bb_dmr_x = s->viz_rect.x + s->viz_rect.w - bb_dmr_w - (bdr_is * 2);
   const int bb_dmr_y = (box_y + (bdr_is * 1.5)) + UI_FEATURE_RIGHT_Y;
-// 스위치 화면 비우기 시작
+
 #if UI_FEATURE_LEFT
-  //if(s->show_debug_ui)
   bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y, bb_dml_w);
 #endif
 
 #if UI_FEATURE_RIGHT
-  //if(s->show_debug_ui)
   bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y, bb_dmr_w);
 #endif
 
@@ -758,8 +756,8 @@ static void ui_draw_vision_speed(UIState *s) {
   const float speed = std::max(0.0, s->scene.controls_state.getCluSpeedMs() * (s->scene.is_metric ? 3.6 : 2.2369363));
   const std::string speed_str = std::to_string((int)std::nearbyint(speed));
   nvgTextAlign(s->vg, NVG_ALIGN_CENTER | NVG_ALIGN_BASELINE);
-  ui_draw_text(s, s->viz_rect.centerX(), 240 + 600, speed_str.c_str(), 130 * 2.5, COLOR_WHITE, "sans-bold");
-  ui_draw_text(s, s->viz_rect.centerX(), 320 + 600, s->scene.is_metric ? "km/h" : "mph", 26 * 2.5, COLOR_WHITE_ALPHA(200), "sans-regular");
+  ui_draw_text(s, s->viz_rect.centerX(), 240, speed_str.c_str(), 96 * 2.5, COLOR_WHITE, "sans-bold");
+  ui_draw_text(s, s->viz_rect.centerX(), 320, s->scene.is_metric ? "km/h" : "mph", 36 * 2.5, COLOR_WHITE_ALPHA(200), "sans-regular");
 }
 
 static void ui_draw_vision_event(UIState *s) {
@@ -841,7 +839,7 @@ static void ui_draw_vision_footer(UIState *s) {
   ui_draw_vision_face(s);
 
 #if UI_FEATURE_BRAKE
-  //ui_draw_vision_brake(s);
+  ui_draw_vision_brake(s);
 #endif
 }
 
